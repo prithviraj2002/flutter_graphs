@@ -2,7 +2,8 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
 class LineChartWidget extends StatefulWidget {
-  const LineChartWidget({Key? key}) : super(key: key);
+  int a;
+  LineChartWidget({required this.a, Key? key}) : super(key: key);
 
   @override
   State<LineChartWidget> createState() => _LineChartWidgetState();
@@ -54,9 +55,17 @@ class _LineChartWidgetState extends State<LineChartWidget> {
         LineChartData(
             lineBarsData: [
           LineChartBarData(
-              spots: points,
+              spots: widget.a == 1? points : points2,
             color: Colors.red
             ),
+              // LineChartBarData(
+              //     spots: points2,
+              //     color: Colors.green
+              // ),
+              // LineChartBarData(
+              //     spots: points3,
+              //     color: Colors.blue
+              // ),
           ],
           borderData: FlBorderData(
             border: const Border(bottom: BorderSide(), left: BorderSide()),
@@ -69,6 +78,8 @@ class _LineChartWidgetState extends State<LineChartWidget> {
             show: false
           )
         ),
+        swapAnimationCurve: Curves.easeIn,
+        swapAnimationDuration: const Duration(seconds: 1),
       ),
     );
   }

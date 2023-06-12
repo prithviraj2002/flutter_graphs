@@ -2,7 +2,8 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
 class BarChartWidget extends StatefulWidget {
-  const BarChartWidget({Key? key}) : super(key: key);
+  int a;
+  BarChartWidget({required this.a, Key? key}) : super(key: key);
 
   @override
   State<BarChartWidget> createState() => _BarChartWidgetState();
@@ -85,6 +86,81 @@ class _BarChartWidgetState extends State<BarChartWidget> {
     ),
   ];
 
+  List<BarChartGroupData> groups2 = [
+    BarChartGroupData(
+        x: 0,
+        barRods: [
+          BarChartRodData(
+            toY: 2,
+          ),
+        ]
+    ),
+    BarChartGroupData(
+        x: 1,
+        barRods: [
+          BarChartRodData(
+              toY: 3
+          ),
+        ]
+    ),
+    BarChartGroupData(
+        x: 2,
+        barRods: [
+          BarChartRodData(
+              toY: 4
+          ),
+        ]
+    ),
+    BarChartGroupData(
+        x: 3,
+        barRods: [
+          BarChartRodData(
+              toY: 5
+          ),
+        ]
+    ),
+    BarChartGroupData(
+        x: 4,
+        barRods: [
+          BarChartRodData(
+              toY: 6
+          ),
+        ]
+    ),
+    BarChartGroupData(
+        x: 5,
+        barRods: [
+          BarChartRodData(
+              toY: 7
+          ),
+        ]
+    ),
+    BarChartGroupData(
+        x: 6,
+        barRods: [
+          BarChartRodData(
+              toY: 8
+          ),
+        ]
+    ),
+    BarChartGroupData(
+        x: 7,
+        barRods: [
+          BarChartRodData(
+              toY: 9
+          ),
+        ]
+    ),
+    BarChartGroupData(
+        x: 8,
+        barRods: [
+          BarChartRodData(
+              toY: 10
+          ),
+        ]
+    ),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -94,7 +170,7 @@ class _BarChartWidgetState extends State<BarChartWidget> {
         BarChartData(
           alignment: BarChartAlignment.center,
           groupsSpace: 32,
-          barGroups: groups,
+          barGroups: widget.a == 1? groups : groups2,
           borderData: FlBorderData(
             border: const Border(bottom: BorderSide(), left: BorderSide()),
           ),
@@ -106,6 +182,8 @@ class _BarChartWidgetState extends State<BarChartWidget> {
                 show: false
             )
         ),
+        swapAnimationCurve: Curves.easeIn,
+        swapAnimationDuration: const Duration(seconds: 1),
       ),
     );
   }

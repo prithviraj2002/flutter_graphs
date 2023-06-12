@@ -3,8 +3,22 @@ import 'package:flutter_graphs/charts/bar_chart.dart';
 import 'package:flutter_graphs/charts/line_chart.dart';
 import 'package:flutter_graphs/charts/nested_graph.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+
+  int animate = 1;
+
+  void change(){
+    setState((){
+      animate == 1 ? animate = 2 : animate = 1;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +31,7 @@ class HomeScreen extends StatelessWidget {
           style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
         ),
       ),
-      body: const SingleChildScrollView(
+      body: SingleChildScrollView(
         child: SizedBox(
           width: double.infinity,
           height: 1250,
@@ -26,23 +40,41 @@ class HomeScreen extends StatelessWidget {
             spacing: 20,
             runSpacing: 20,
             children: [
-              Text(
-                '1) Line Chart',
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    '1) Line Chart',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20
+                    ),
+                  ),
+                  TextButton(
+                      onPressed: change,
+                      child: const Text('Animate', style: TextStyle(color: Colors.blue),)
+                  )
+                ],
               ),
-              LineChartWidget(),
-              Text(
-                '2) Bar Chart',
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20
-                ),
+              LineChartWidget(a: animate,),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    '2) Bar Chart',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20
+                    ),
+                  ),
+                  TextButton(
+                      onPressed: change,
+                      child: const Text('Animate', style: TextStyle(color: Colors.blue),)
+                  )
+                ],
               ),
-              BarChartWidget(),
-              Text(
+              BarChartWidget(a: animate),
+              const Text(
                 '3) Nested Graph',
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
@@ -51,8 +83,8 @@ class HomeScreen extends StatelessWidget {
               ),
               Stack(
                 children: [
-                  BarChartWidget(),
-                  LineChartWidget(),
+                  BarChartWidget(a: animate),
+                  LineChartWidget(a: animate,),
                 ],
               ),
             ],
